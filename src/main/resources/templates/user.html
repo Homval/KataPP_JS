@@ -5,7 +5,7 @@
     <title>Spring Security Example</title>
 </head>
 <body>
-<h1>User, welcome spring boot security page!</h1>
+<h1>User page</h1>
 
 <div>
     <table th:border="1">
@@ -22,10 +22,16 @@
         <td th:utext="${user.username}">Username</td>
         <td th:utext="${user.password}">Password</td>
         <td th:utext="${user.email}">Email</td>
-        <td th:list="${user.roles}">Roles</td>
+        <td th:utext="${user.roles}">Roles</td>
 
         </tbody>
     </table>
+
+    <br><br>
+
+    <form  th:action="@{/logout}" method="post">
+        <input type="submit" value="Logout">
+    </form>
 
 </div>
 

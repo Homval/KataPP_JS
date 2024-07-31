@@ -6,6 +6,8 @@
     <title></title>
 </head>
 <body>
+
+<h1>Admin page</h1>
 <div>
     <table th:border="1">
         <thead>
@@ -22,7 +24,7 @@
             <td th:utext="${user.username}">Username</td>
             <td th:utext="${user.password}">Password</td>
             <td th:utext="${user.email}">Email</td>
-            <td th:list="${user.roles}">Roles</td>
+            <td th:utext="${user.roles}">Roles</td>
             <td><a th:href="@{/edit(id=${user.id})}">Edit</a></td>
             <td><a th:href="@{/delete(id=${user.id})}">Delete</a></td>
         </tr>
@@ -32,6 +34,12 @@
 
     <br>
     <a href="add">Add new user</a>
+
+    <br><br>
+
+    <form  th:action="@{/logout}" method="post">
+        <input type="submit" value="Logout">
+    </form>
 
 </div>
 </body>

@@ -13,10 +13,18 @@
     <input type="text" id="password" name="password" th:value="${user.password}" required><br>
     <label for="email">Email: </label><br>
     <input type="text" id="email" name="email" th:value="${user.email}" required><br>
-    <label for="role">Roles: </label><br>
-    <input type="text" id="role" name="role" th:value="${user.roles}" required><br>
 
+    <th:block th:each="role: ${roles}">
+        <input type="checkbox" th:field="*{roles}"
+               th:text="${role.role}" th:value="${role.id}"/>
+    </th:block>
+    <br><br>
     <input type="submit" value="Submit">
+</form>
+
+<br><br>
+<form  th:action="@{/logout}" method="post">
+    <input type="submit" value="Logout">
 </form>
 
 </body>
