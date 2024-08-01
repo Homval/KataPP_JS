@@ -25,15 +25,15 @@
             <td th:utext="${user.password}">Password</td>
             <td th:utext="${user.email}">Email</td>
             <td th:utext="${user.roles}">Roles</td>
-            <td><a th:href="@{/edit(id=${user.id})}">Edit</a></td>
-            <td><a th:href="@{/delete(id=${user.id})}">Delete</a></td>
+            <td><a th:href="@{/admin/edit(id=${user.id})}">Edit</a></td>
+            <td><a th:href="@{/admin/delete(id=${user.id})}">Delete</a></td>
         </tr>
 
         </tbody>
     </table>
 
     <br>
-    <a href="add">Add new user</a>
+    <a href="/admin/add">Add new user</a>
 
     <br><br>
 

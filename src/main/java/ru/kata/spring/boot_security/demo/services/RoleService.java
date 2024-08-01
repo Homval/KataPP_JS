@@ -7,7 +7,7 @@ import ru.kata.spring.boot_security.demo.repositories.RoleRepository;
 import java.util.List;
 
 @Service
-public class RoleService {
+public class RoleService implements RoleServiceInterface{
 
     private final RoleRepository roleRepository;
 
@@ -15,6 +15,7 @@ public class RoleService {
         this.roleRepository = roleRepository;
     }
 
+    @Override
     public List<Role> getRoles() {
         return roleRepository.findAll();
     }
