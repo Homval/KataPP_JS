@@ -34,6 +34,7 @@ public class AdminRoleController {
         model.addAttribute("users", users);
         model.addAttribute("admin", admin);
         model.addAttribute("roles", roles);
+        model.addAttribute("newUser", new User());
         return "/admin/admin";
     }
 
