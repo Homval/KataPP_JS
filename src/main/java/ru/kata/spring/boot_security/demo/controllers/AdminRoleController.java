@@ -56,17 +56,17 @@ public class AdminRoleController {
         return "redirect:/admin";
     }
 
-//    @GetMapping("/edit")
-//    public String editUser(@RequestParam(name = "id") long id, Model model) {
-//        User user = userService.findById(id);
-//        model.addAttribute("user", user);
-//        model.addAttribute("roles", roleService.getRoles());
-//        return "/admin/edit_user";
-//    }
+    @GetMapping("/edit")
+    public String editUser(@RequestParam(name = "id") long id, Model model) {
+        User user = userService.findById(id);
+        model.addAttribute("user", user);
+        model.addAttribute("roles", roleService.getRoles());
+        return "/admin/edit_user";
+    }
 
     @PostMapping("/edit")
     public String updateUser(@ModelAttribute("user") User user) {
         userService.save(user);
-        return "redirect:/admin/admin";
+        return "redirect:/admin";
     }
 }
