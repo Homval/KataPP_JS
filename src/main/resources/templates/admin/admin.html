@@ -71,9 +71,9 @@
                                         <tbody>
                                         <tr scope="row" th:each="user : ${users}">
                                             <td th:utext="${user.id}">Id</td>
-                                            <td th:utext="${user.firstName}">Username</td>
-                                            <td th:utext="${user.lastName}">Password</td>
-                                            <td th:utext="${user.age}">Password</td>
+                                            <td th:utext="${user.firstName}">First Name</td>
+                                            <td th:utext="${user.lastName}">Last Name</td>
+                                            <td th:utext="${user.age}">Age</td>
                                             <td th:utext="${user.email}">Email</td>
                                             <td>
                                                 <th:block th:each="role : ${user.roles}"
