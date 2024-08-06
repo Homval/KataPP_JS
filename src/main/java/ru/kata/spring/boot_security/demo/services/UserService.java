@@ -28,11 +28,15 @@ public class UserService implements UserServiceInterface {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = findByUsername(username);
+        User user = findByEmail(username);
         if (user == null) {
             throw new UsernameNotFoundException(username);
         }
         return user;
+    }
+
+    private User findByEmail(String email) {
+        return userRepository.findByEmail(email);
     }
 
     @Override

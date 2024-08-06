@@ -11,7 +11,6 @@ import ru.kata.spring.boot_security.demo.services.UserServiceInterface;
 
 import java.security.Principal;
 import java.util.List;
-import java.util.Set;
 
 @Controller
 @RequestMapping("/admin")
@@ -35,7 +34,7 @@ public class AdminRoleController {
         model.addAttribute("admin", admin);
         model.addAttribute("roles", roles);
         model.addAttribute("newUser", new User());
-        return "/admin/admin";
+        return "/admin";
     }
 
     @GetMapping("/delete")
@@ -44,12 +43,12 @@ public class AdminRoleController {
         return "redirect:/admin";
     }
 
-    @GetMapping("/add")
-    public String createUser(Model model) {
-        model.addAttribute("user", new User());
-        model.addAttribute("roles", roleService.getRoles());
-        return "/admin/add_user";
-    }
+//    @GetMapping("/add")
+//    public String createUser(Model model) {
+//        model.addAttribute("user", new User());
+//        model.addAttribute("roles", roleService.getRoles());
+//        return "/admin/add_user";
+//    }
 
     @PostMapping("/add")
     public String addUser(@ModelAttribute("user") User user) {
@@ -57,13 +56,13 @@ public class AdminRoleController {
         return "redirect:/admin";
     }
 
-    @GetMapping("/edit")
-    public String editUser(@RequestParam(name = "id") long id, Model model) {
-        User user = userService.findById(id);
-        model.addAttribute("user", user);
-        model.addAttribute("roles", roleService.getRoles());
-        return "/admin/edit_user";
-    }
+//    @GetMapping("/edit")
+//    public String editUser(@RequestParam(name = "id") long id, Model model) {
+//        User user = userService.findById(id);
+//        model.addAttribute("user", user);
+//        model.addAttribute("roles", roleService.getRoles());
+//        return "/admin/edit_user";
+//    }
 
     @PostMapping("/edit")
     public String updateUser(@ModelAttribute("user") User user) {

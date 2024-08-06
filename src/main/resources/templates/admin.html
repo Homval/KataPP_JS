@@ -12,19 +12,18 @@
 <body>
 
 <navbar class="navbar navbar-dark bg-dark">
-    <span class="navbar-text">
-        <h5 class="text-white bg-dark">
-            <strong th:text="${admin.email}"/>
-            with roles:
-            <tr th:each="role : ${admin.getRoles()}" th:text="${role.toString()}"/>
-        </h5>
-    </span>
-<!--    <a type="button" class="btn-link bg-dark text-white" href="/logout">-->
-    <!--        Logout-->
-    <!--    </a>-->
-    <form class="form-signin" method="get" action="/logout">
-        <button class="btn btn-outline-light border-0" type="submit">Logout</button>
-    </form>
+    <div class="container-fluid">
+        <span class="navbar-text">
+            <h5 class="text-white bg-dark">
+                <strong th:text="${admin.email}"/>
+                with roles:
+                <tr th:each="role : ${admin.getRoles()}" th:text="${role.toString()}"/>
+            </h5>
+        </span>
+        <form class="form-signin" method="post" th:action="@{/logout}">
+            <button class="btn btn-dark text-white border-0" type="submit">Logout</button>
+        </form>
+    </div>
 </navbar>
 
 <div class="container-fluid">

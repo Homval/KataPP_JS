@@ -17,8 +17,8 @@
                     with roles:
                     <tr th:each="role : ${user.roles}" th:text="${role.toString()}"></tr></h5>
             </span>
-        <form class="form-signin" method="get" action="/logout">
-            <button class="btn btn-outline-light border-0" type="submit">Logout</button>
+        <form class="form-signin" method="post" th:action="@{/logout}">
+            <button class="btn btn-dark text-white border-0" type="submit">Logout</button>
         </form>
     </div>
 </nav>

@@ -23,6 +23,6 @@ public class UserRoleController {
     public String showUser(Principal principal, Model model) {
         User user = userService.findByUsername(principal.getName());
         model.addAttribute("user", user);
-        return "/user/user";
+        return "/user";
     }
 }
