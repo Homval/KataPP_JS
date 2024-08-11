@@ -1,5 +1,6 @@
 package ru.kata.spring.boot_security.demo.entities;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -10,6 +11,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "users")
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class User implements UserDetails {
 
     @Id

@@ -58,6 +58,12 @@ public class UserService implements UserServiceInterface {
     }
 
     @Override
+    @Transactional
+    public void deleteById(long id) {
+        userRepository.deleteById(id);
+    }
+
+    @Override
     public User findById(long id) throws UsernameNotFoundException {
         User user = userRepository.findById(id).orElse(null);
         if (user == null) {
