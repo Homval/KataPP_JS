@@ -11,7 +11,9 @@ import ru.kata.spring.boot_security.demo.exceptionHandler.NoSuchUserException;
 import ru.kata.spring.boot_security.demo.exceptionHandler.NoUniqueLoginException;
 import ru.kata.spring.boot_security.demo.exceptionHandler.UserDataInfo;
 import ru.kata.spring.boot_security.demo.services.RoleService;
+import ru.kata.spring.boot_security.demo.services.RoleServiceInterface;
 import ru.kata.spring.boot_security.demo.services.UserService;
+import ru.kata.spring.boot_security.demo.services.UserServiceInterface;
 
 import java.util.List;
 import java.util.Objects;
@@ -20,11 +22,11 @@ import java.util.Objects;
 @RequestMapping("/rest")
 public class UserRestController {
 
-    UserService userService;
-    RoleService roleService;
+    UserServiceInterface userService;
+    RoleServiceInterface roleService;
 
     @Autowired
-    public UserRestController(UserService userService, RoleService roleService) {
+    public UserRestController(UserServiceInterface userService, RoleServiceInterface roleService) {
         this.userService = userService;
         this.roleService = roleService;
     }

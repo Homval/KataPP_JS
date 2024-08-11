@@ -1,6 +1,7 @@
 package ru.kata.spring.boot_security.demo.entities;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -11,32 +12,38 @@ import java.util.Set;
 
 @Entity
 @Table(name = "users")
-@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonProperty("id")
     private long id;
 
     @Column(name = "first_name", nullable = false, unique = true)
+    @JsonProperty("firstName")
     private String firstName;
 
     @Column(name = "last_name", nullable = false)
+    @JsonProperty("lastName")
     private String lastName;
 
     @Column(name = "age", nullable = false)
+    @JsonProperty("age")
     private Integer age;
 
     @Column(name = "email", unique = true, nullable = false)
+    @JsonProperty("email")
     private String email;
 
     @Column(name = "password", nullable = false)
+    @JsonProperty("password")
     private String password;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "users_roles",
         joinColumns = @JoinColumn(name = "user_id"),
         inverseJoinColumns = @JoinColumn(name = "role_id"))
+    @JsonProperty("roles")
     private Set<Role> roles = new HashSet<>();
 
 
@@ -96,6 +103,7 @@ public class User implements UserDetails {
     }
 
     @Override
+    @JsonIgnore
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return getRoles();
     }
@@ -106,26 +114,31 @@ public class User implements UserDetails {
     }
 
     @Override
+    @JsonIgnore
     public String getUsername() {
         return firstName;
     }
 
     @Override
+    @JsonIgnore
     public boolean isAccountNonExpired() {
         return true;
     }
 
     @Override
+    @JsonIgnore
     public boolean isAccountNonLocked() {
         return true;
     }
 
     @Override
+    @JsonIgnore
     public boolean isCredentialsNonExpired() {
         return true;
     }
 
     @Override
+    @JsonIgnore
     public boolean isEnabled() {
         return true;
     }

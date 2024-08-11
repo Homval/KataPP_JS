@@ -11,11 +11,11 @@ public interface UserServiceInterface extends UserDetailsService {
 
     List<User> findAllUsers();
 
-    User save(User user);
+    void save(User user);
 
     User findById(long id);
 
-    User createUser(User user);
+    void createUser(User user);
 
     void delete(User user);
 
