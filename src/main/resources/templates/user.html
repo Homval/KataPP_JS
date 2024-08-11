@@ -11,11 +11,7 @@
 <body>
 <nav class="navbar navbar-dark bg-dark">
     <div class="container-fluid">
-            <span class="navbar-text">
-                <h5 class="text-white bg-dark">
-                    <strong th:text="${user.email}"></strong>
-                    with roles:
-                    <tr th:each="role : ${user.roles}" th:text="${role.toString()}"></tr></h5>
+            <span id="currentUserNavbar">
             </span>
         <form class="form-signin" method="post" th:action="@{/logout}">
             <button class="btn btn-dark text-white border-0" type="submit">Logout</button>
@@ -51,19 +47,7 @@
                                     <th>Role</th>
                                 </tr>
                                 </thead>
-                                <tbody>
-                                <tr>
-                                    <td><p th:text="${user.id}"/></td>
-                                    <td><p th:text="${user.firstName}"/></td>
-                                    <td><p th:text="${user.lastName}"/></td>
-                                    <td><p th:text="${user.age}"/></td>
-                                    <td><p th:text="${user.email}"/></td>
-                                    <td>
-                                        <th:block th:each="role : ${user.roles}"
-                                                  th:text="${role.toString()}">
-                                        </th:block>
-                                    </td>
-                                </tr>
+                                <tbody id="userData">
                                 </tbody>
                             </table>
                         </div>
@@ -83,5 +67,6 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+<script src="/static/user.js"></script>
 </body>
 </html>

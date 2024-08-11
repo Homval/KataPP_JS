@@ -13,12 +13,7 @@
 
 <navbar class="navbar navbar-dark bg-dark">
     <div class="container-fluid">
-        <span class="navbar-text">
-            <h5 class="text-white bg-dark">
-                <strong th:text="${admin.email}"/>
-                with roles:
-                <tr th:each="role : ${admin.getRoles()}" th:text="${role.toString()}"/>
-            </h5>
+        <span id="currentUserNavbar">
         </span>
         <form class="form-signin" method="post" th:action="@{/logout}">
             <button class="btn btn-dark text-white border-0" type="submit">Logout</button>
@@ -80,58 +75,56 @@
                                 <div class="card-header bg-light">
                                     <h5>Add new user</h5>
                                 </div>
-                                <form id="addNewUser">
-                                    <div class="card-body">
-                                        <div class="mx-auto text-center" style="width: 300px;">
 
-                                            <div class="form-group">
-                                                <label for="firstName" class="form-label"><strong>First
-                                                    name</strong></label>
-                                                <input type="text" class="form-control" id="firstName"
-                                                       placeholder="First name">
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="lastName" class="form-label"><strong>Last
-                                                    name</strong></label>
-                                                <input type="text" class="form-control" id="lastName"
-                                                       placeholder="Last name">
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="age" class="form-label"><strong>Age</strong></label>
-                                                <input type="number" class="form-control" id="age"
-                                                       placeholder="Age">
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="email" class="form-label"><strong>Email</strong></label>
-                                                <input type="text" class="form-control" id="email"
-                                                       placeholder="Email">
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="password"
-                                                       class="form-label"><strong>Password</strong></label>
-                                                <input type="password" class="form-control" id="password"
-                                                       placeholder="Password">
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="role"
-                                                       class="form-label"><strong>Role</strong></label>
-                                                <select class="form-control"
-                                                        name="roles" size="2"
-                                                        multiple="multiple" id="role">
-                                                    <option value="ROLE_USER">USER</option>
-                                                    <option value="ROLE_ADMIN">ADMIN</option>
-                                                </select>
-                                            </div>
-
-                                            <button type="submit" class="btn btn-success">Add new user</button>
+                                <div class="card-body mx-auto text-center">
+                                    <form id="addNewUser">
+                                        <div class="form-group">
+                                            <label for="firstName" class="form-label"><strong>First
+                                                name</strong></label>
+                                            <input type="text" class="form-control" id="firstName"
+                                                   placeholder="First name">
                                         </div>
-                                    </div>
-                                </form>
+
+                                        <div class="form-group">
+                                            <label for="lastName" class="form-label"><strong>Last
+                                                name</strong></label>
+                                            <input type="text" class="form-control" id="lastName"
+                                                   placeholder="Last name">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="age" class="form-label"><strong>Age</strong></label>
+                                            <input type="number" class="form-control" id="age"
+                                                   placeholder="Age">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="email" class="form-label"><strong>Email</strong></label>
+                                            <input type="text" class="form-control" id="email"
+                                                   placeholder="Email">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="password"
+                                                   class="form-label"><strong>Password</strong></label>
+                                            <input type="password" class="form-control" id="password"
+                                                   placeholder="Password">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="role"
+                                                   class="form-label"><strong>Role</strong></label>
+                                            <select class="form-control"
+                                                    name="roles" size="2"
+                                                    multiple="multiple" id="role">
+                                                <option value="ROLE_USER">USER</option>
+                                                <option value="ROLE_ADMIN">ADMIN</option>
+                                            </select>
+                                        </div>
+
+                                        <button type="submit" class="btn btn-success">Add new user</button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -175,5 +168,6 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+<script src="/static/admin.js"></script>
 </body>
 </html>
