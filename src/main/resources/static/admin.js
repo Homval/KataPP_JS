@@ -22,8 +22,8 @@ async function findCurrentUser() {
     return response.json()
 }
 
-async function findUserById(id) {
-    const response = await fetch('/rest/admin/${id}')
+async function findUserById(userId) {
+    const response = await fetch(`rest/admin/${userId}`)
     return response.json()
 }
 
@@ -36,7 +36,7 @@ async function editUser(user) {
 }
 
 async function deleteUser(id) {
-    await fetch('/rest/admin/${id}', {method: 'DELETE'})
+    await fetch(`/rest/admin/${id}`, {method: 'DELETE'})
 }
 
 
@@ -152,26 +152,26 @@ async function createUserForm() {
 async function createModal(modal) {
     modal.addEventListener('show.bs.modal',
         async function(event) {
-            const userId = $(event.relatedTarget).data('user-id')
+            const userId = event.relatedTarget.dataset.userId;
             const user = await findUserById(userId)
 
             const modalBody = modal.querySelector('.modal-body')
 
-            const idInput = modalBody.find("input[data-user-id='id']")
-            const firstNameInput = modalBody.find("input[data-user-id='firstName']")
-            const lastNameInput = modalBody.find("input[data-user-id='lastName']")
-            const ageInput = modalBody.find("input[data-user-id='age']")
-            const emailInput = modalBody.find("input[data-user-id='email']")
-            const passwordInput = modalBody.find("input[data-user-id='password']")
+            const idInput = modalBody.querySelector("input[data-user-id='id']")
+            const firstNameInput = modalBody.querySelector("input[data-user-id='firstName']")
+            const lastNameInput = modalBody.querySelector("input[data-user-id='lastName']")
+            const ageInput = modalBody.querySelector("input[data-user-id='age']")
+            const emailInput = modalBody.querySelector("input[data-user-id='email']")
+            const passwordInput = modalBody.querySelector("input[data-user-id='password']")
             if (passwordInput !== null) {
-                passwordInput.val(user.password);
+                passwordInput.value = user.password;
             }
 
-            idInput.val(user.id)
-            firstNameInput.val(user.firstName)
-            lastNameInput.val(user.lastName)
-            ageInput.val(user.age)
-            emailInput.val(user.email)
+            idInput.value = user.id
+            firstNameInput.value = user.firstName
+            lastNameInput.value = user.lastName
+            ageInput.value = user.age
+            emailInput.value = user.email
 
             let rolesSelect = HTMLSelectElement;
 
@@ -181,9 +181,9 @@ async function createModal(modal) {
 
             if (rolesSelectDelete !== null) {
                 rolesSelect = rolesSelectDelete;
-                for (let role of user.roles) {
+                for (let i = 0; i < user.roles.length; i++) {
                     userRolesHTML +=
-                        `<option value="${role.role}">${role.role.substring(5)}</option>`
+                        `<option value="${user.roles[i].role}">${user.roles[i].role}</option>`;
                 }
             } else if (rolesSelectEdit !== null) {
                 rolesSelect = rolesSelectEdit;
