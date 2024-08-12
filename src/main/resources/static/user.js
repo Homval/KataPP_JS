@@ -21,7 +21,7 @@ async function fillCurrentUserTable() {
             <td>${currentUser.lastName}</td>
             <td>${currentUser.age}</td>
             <td>${currentUser.email}</td>
-            <td>${currentUser.roles?.map(role => role.role).join(' ')}</td>
+            <td>${currentUser.roles?.map(role => role.role.substring(5)).join(' ')}</td>
         </tr>`
     table.innerHTML = currentUserTableHTML
 }
@@ -31,5 +31,5 @@ async function setCurrentUserNavbar() {
     const currentUser = await findCurrentUser()
 
     currentUserNavbar.innerHTML =
-        `<strong>${currentUser.email}</strong> with roles: ${currentUser.roles?.map(role => role.role).join(' ')}`
+        `<strong>${currentUser.email}</strong> with roles: ${currentUser.roles?.map(role => role.role.substring(5)).join(' ')}`
 }

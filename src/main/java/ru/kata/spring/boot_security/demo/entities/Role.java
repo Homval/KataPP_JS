@@ -32,7 +32,7 @@ public class Role implements GrantedAuthority {
     }
 
     public String getRole() {
-        return role.substring(5);
+        return role;
     }
 
     public void setRole(String role) {
