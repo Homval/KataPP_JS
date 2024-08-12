@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded',
 
 async function findCurrentUser() {
     const response = await fetch('rest/user')
-    return response.json()
+    return await response.json()
 }
 
 async function fillCurrentUserTable() {
@@ -21,7 +21,6 @@ async function fillCurrentUserTable() {
             <td>${user.lastName}</td>
             <td>${user.age}</td>
             <td>${user.email}</td>
-            <td>${user.password}</td>
             <td>${user.roles.map(role => role.toString()).join(' ')}</td>
         </tr>`
     table.innerHTML = currentUserTableHTML
