@@ -38,7 +38,7 @@ async function deleteUser(id) {
 // fill admin table
 async function fillTableOfUsers() {
     const table = document.getElementById('usersTable')
-    const users = findAllUsers()
+    const users = await findAllUsers()
 
     let usersTableHTML = ''
     for (let user of users) {
@@ -49,7 +49,7 @@ async function fillTableOfUsers() {
                 <td>${user.lastName}</td>
                 <td>${user.age}</td>
                 <td>${user.email}</td>
-                <td>${user.roles.map(role => role.toString()).join(' ')}</td>
+                <td>${user.roles?.map(role => role.role.substring(5)).join(' ')}</td>
                 <td>
                     <button class="btn btn-info btn-sm text-white"
                             data-bs-toggle="modal"
@@ -74,16 +74,16 @@ async function fillTableOfUsers() {
 
 async function fillCurrentUserTable() {
     const table = document.getElementById('userData')
-    const user = findCurrentUser()
+    const currentUser = await findCurrentUser()
 
     let currentUserTableHTML =
         `<tr>
-            <td>${user.id}</td>
-            <td>${user.firstName}</td>
-            <td>${user.lastName}</td>
-            <td>${user.age}</td>
-            <td>${user.email}</td>
-            <td>${user.roles.map(role => role.toString()).join(' ')}</td>
+            <td>${currentUser.id}</td>
+            <td>${currentUser.firstName}</td>
+            <td>${currentUser.lastName}</td>
+            <td>${currentUser.age}</td>
+            <td>${currentUser.email}</td>
+            <td>${currentUser.roles?.map(role => role.role.substring(5)).join(' ')}</td>
         </tr>`
     table.innerHTML = currentUserTableHTML
 }
@@ -92,12 +92,12 @@ async function fillCurrentUserTable() {
 
 async function setCurrentUserNavbar() {
     const currentUserNavbar = document.getElementById('currentUserNavbar')
-    const currentUser = findCurrentUser()
+    const currentUser = await findCurrentUser()
 
     currentUserNavbar.innerHTML =
         `<strong>${currentUser.email}</strong>
                  with roles: 
-                 ${currentUser.roles.map(role => role.toString()).join(' ')}`
+                 ${currentUser.roles?.map(role => role.role.substring(5)).join(' ')}`
 }
 
 // create user form
