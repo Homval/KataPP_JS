@@ -5,7 +5,8 @@ document.addEventListener('DOMContentLoaded',
         await fillTableOfUsers()
         await fillCurrentUserTable()
         await createUserForm()
-
+        await deleteUserModal()
+        await editUserModal()
     })
 
 const ROLE_USER = {id: 1, role: "ROLE_USER"}
@@ -143,5 +144,129 @@ async function createUserForm() {
             addUserForm.reset()
             document.querySelector("a#home-tab").click()
             await fillTableOfUsers()
+        })
+}
+
+// create modal window
+
+async function createModal(modal) {
+    modal.addEventListener('show.bs.modal',
+        async function(event) {
+            const userId = $(event.relatedTarget).data('user-id')
+            const user = await findUserById(userId)
+
+            const modalBody = modal.querySelector('.modal-body')
+
+            const idInput = modalBody.find("input[data-user-id='id']")
+            const firstNameInput = modalBody.find("input[data-user-id='firstName']")
+            const lastNameInput = modalBody.find("input[data-user-id='lastName']")
+            const ageInput = modalBody.find("input[data-user-id='age']")
+            const emailInput = modalBody.find("input[data-user-id='email']")
+            const passwordInput = modalBody.find("input[data-user-id='password']")
+            if (passwordInput !== null) {
+                passwordInput.val(user.password);
+            }
+
+            idInput.val(user.id)
+            firstNameInput.val(user.firstName)
+            lastNameInput.val(user.lastName)
+            ageInput.val(user.age)
+            emailInput.val(user.email)
+
+            let rolesSelect = HTMLSelectElement;
+
+            let rolesSelectDelete = modalBody.querySelector("select[data-user-id='rolesDelete']");
+            let rolesSelectEdit = modalBody.querySelector("select[data-user-id='rolesEdit']");
+            let userRolesHTML = "";
+
+            if (rolesSelectDelete !== null) {
+                rolesSelect = rolesSelectDelete;
+                for (let role of user.roles) {
+                    userRolesHTML +=
+                        `<option value="${role.role}">${role.role.substring(5)}</option>`
+                }
+            } else if (rolesSelectEdit !== null) {
+                rolesSelect = rolesSelectEdit;
+                userRolesHTML +=
+                    `<option value="ROLE_USER">USER</option>
+                     <option value="ROLE_ADMIN">ADMIN</option>`
+            }
+
+            rolesSelect.innerHTML = userRolesHTML
+        })
+}
+
+// delete user modal
+
+async function deleteUserModal() {
+    const modalDelete = document.getElementById('deleteModal')
+
+    await createModal(modalDelete)
+
+    const formDelete = document.getElementById("modalBodyDelete");
+
+    formDelete.addEventListener("submit",
+        async function(event) {
+            event.preventDefault();
+
+            const userId = event.target.querySelector("#idDelete").value;
+            await deleteUser(userId);
+            await fillTableOfUsers();
+
+            const modalBootstrap = bootstrap.Modal.getInstance(modalDelete);
+            modalBootstrap.hide();
+        }
+    )
+}
+
+// edit user modal
+
+async function editUserModal() {
+    const  modalEdit = document.getElementById("editModal")
+
+    await createModal(modalEdit)
+
+    const formEdit = document.getElementById("modalBodyEdit")
+
+    formEdit.addEventListener("submit",
+        async function(event) {
+            event.preventDefault()
+
+            const userId = formEdit.querySelector("#id").value.trim()
+            const firstName = formEdit.querySelector("#firstName").value.trim()
+            const lastName = formEdit.querySelector("#lastName").value.trim()
+            const age = formEdit.querySelector("#age").value.trim()
+            const email = formEdit.querySelector("#email").value.trim()
+            const password = formEdit.querySelector("#password").value.trim()
+
+            const selectedRole = document.getElementById("rolesEdit")
+
+            let roles = []
+
+            for (let option of selectedRole.selectedOptions) {
+                if (option.value === ROLE_USER.role) {
+                    roles.push(ROLE_USER)
+                }
+                if (option.value === ROLE_ADMIN.role) {
+                    roles.push(ROLE_ADMIN)
+                }
+            }
+
+            const editedUser = {
+                id: userId,
+                firstName: firstName,
+                lastName: lastName,
+                age: age,
+                email: email,
+                password: password,
+                roles: roles
+            };
+
+            await editUser(editedUser)
+            await fillTableOfUsers()
+
+            const modalBootstrap = bootstrap.Modal.getInstance(modalDelete);
+            modalBootstrap.hide();
+
         })
 }
