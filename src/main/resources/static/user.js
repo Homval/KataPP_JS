@@ -12,26 +12,24 @@ async function findCurrentUser() {
 
 async function fillCurrentUserTable() {
     const table = document.getElementById('userData')
-    const user = findCurrentUser()
+    const currentUser = await findCurrentUser()
 
     let currentUserTableHTML =
         `<tr>
-            <td>${user.id}</td>
-            <td>${user.firstName}</td>
-            <td>${user.lastName}</td>
-            <td>${user.age}</td>
-            <td>${user.email}</td>
-            <td>${user.roles.map(role => role.toString()).join(' ')}</td>
+            <td>${currentUser.id}</td>
+            <td>${currentUser.firstName}</td>
+            <td>${currentUser.lastName}</td>
+            <td>${currentUser.age}</td>
+            <td>${currentUser.email}</td>
+            <td>${currentUser.roles?.map(role => role.role).join(' ')}</td>
         </tr>`
     table.innerHTML = currentUserTableHTML
 }
 
 async function setCurrentUserNavbar() {
     const currentUserNavbar = document.getElementById('currentUserNavbar')
-    const currentUser = findCurrentUser()
+    const currentUser = await findCurrentUser()
 
     currentUserNavbar.innerHTML =
-        `<strong>${currentUser.email}</strong>
-                 with roles: 
-                 ${currentUser.roles.map(role => role.toString()).join(' ')}`
+        `<strong>${currentUser.email}</strong> with roles: ${currentUser.roles?.map(role => role.role).join(' ')}`
 }

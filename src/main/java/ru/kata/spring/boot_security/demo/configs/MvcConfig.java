@@ -12,10 +12,10 @@ public class MvcConfig implements WebMvcConfigurer {
         registry.addViewController("/user").setViewName("user");
     }
 
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/static/**")
-                .addResourceLocations("classpath:/js/")
-                .resourceChain(true)
-                .addResolver(new PathResourceResolver());;
-    }
+//    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+//        registry.addResourceHandler("/static/**")
+//                .addResourceLocations("classpath:/js/")
+//                .resourceChain(true)
+//                .addResolver(new PathResourceResolver());;
+//    }
 }
