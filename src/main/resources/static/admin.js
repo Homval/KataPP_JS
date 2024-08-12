@@ -232,12 +232,12 @@ async function editUserModal() {
         async function(event) {
             event.preventDefault()
 
-            const userId = formEdit.querySelector("#id").value.trim()
-            const firstName = formEdit.querySelector("#firstName").value.trim()
-            const lastName = formEdit.querySelector("#lastName").value.trim()
-            const age = formEdit.querySelector("#age").value.trim()
-            const email = formEdit.querySelector("#email").value.trim()
-            const password = formEdit.querySelector("#password").value.trim()
+            const userId = formEdit.querySelector("#id").value
+            const firstName = formEdit.querySelector("#firstName").value
+            const lastName = formEdit.querySelector("#lastName").value
+            const age = formEdit.querySelector("#age").value
+            const email = formEdit.querySelector("#email").value
+            const password = formEdit.querySelector("#password").value
 
             const selectedRole = document.getElementById("rolesEdit")
 
