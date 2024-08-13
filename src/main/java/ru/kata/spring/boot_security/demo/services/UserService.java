@@ -53,12 +53,6 @@ public class UserService implements UserServiceInterface {
 
     @Override
     @Transactional
-    public void delete(User user) {
-        userRepository.delete(user);
-    }
-
-    @Override
-    @Transactional
     public void deleteById(long id) {
         userRepository.deleteById(id);
     }
@@ -70,12 +64,5 @@ public class UserService implements UserServiceInterface {
             throw new UsernameNotFoundException("User not found");
         }
         return user;
-    }
-
-    @Override
-    @Transactional
-    public void createUser(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userRepository.save(user);
     }
 }

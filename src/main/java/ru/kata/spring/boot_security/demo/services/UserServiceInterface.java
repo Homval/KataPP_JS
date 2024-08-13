@@ -15,9 +15,5 @@ public interface UserServiceInterface extends UserDetailsService {
 
     User findById(long id);
 
-    void createUser(User user);
-
-    void delete(User user);
-
     void deleteById(long id);
 }

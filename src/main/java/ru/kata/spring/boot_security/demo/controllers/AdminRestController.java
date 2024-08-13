@@ -48,7 +48,7 @@ public class AdminRestController {
             return new ResponseEntity<>(new UserDataInfo(errorMessage), HttpStatus.BAD_REQUEST);
         }
         try {
-            userService.createUser(user);
+            userService.save(user);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (DataIntegrityViolationException e) {
             throw new NoUniqueLoginException("User with login " + user.getEmail() + " already exists");
