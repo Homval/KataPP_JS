@@ -203,7 +203,7 @@ async function createModal(modal) {
                 rolesSelect = rolesSelectDelete;
                 for (let i = 0; i < user.roles.length; i++) {
                     userRolesHTML +=
-                        `<option value="${user.roles[i].role}">${user.roles[i].role}</option>`;
+                        `<option value="${user.roles[i].role}">${user.roles[i].role.substring(5)}</option>`;
                 }
             } else if (rolesSelectEdit !== null) {
                 rolesSelect = rolesSelectEdit;
@@ -259,11 +259,12 @@ async function editUserModal() {
             let roles = []
 
             for (let option of selectedRole.selectedOptions) {
-                if (option.value === ROLE_USER.role) {
-                    roles.push(ROLE_USER)
-                }
-                if (option.value === ROLE_ADMIN.role) {
-                    roles.push(ROLE_ADMIN)
+                const roleList = await getRolesList()
+
+                for (let roleItem of roleList) {
+                    if (option.value === roleItem.role) {
+                        roles.push(roleItem)
+                    }
                 }
             }
 
