@@ -207,9 +207,11 @@ async function createModal(modal) {
                 }
             } else if (rolesSelectEdit !== null) {
                 rolesSelect = rolesSelectEdit;
-                userRolesHTML +=
-                    `<option value="ROLE_USER">USER</option>
-                     <option value="ROLE_ADMIN">ADMIN</option>`
+                const roleList = await getRolesList()
+                for (let opt of roleList) {
+                    userRolesHTML +=
+                        `<option value="${opt.role}">${opt.role.substring(5)}</option>}</option>`
+                }
             }
 
             rolesSelect.innerHTML = userRolesHTML
