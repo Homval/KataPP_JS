@@ -232,12 +232,12 @@ async function editUserModal() {
         async function(event) {
             event.preventDefault()
 
-            const userId = formEdit.querySelector("#id").value
-            const firstName = formEdit.querySelector("#firstName").value
-            const lastName = formEdit.querySelector("#lastName").value
-            const age = formEdit.querySelector("#age").value
-            const email = formEdit.querySelector("#email").value
-            const password = formEdit.querySelector("#password").value
+            // const userId = formEdit.querySelector("#id").value.trim()
+            // const firstName = formEdit.querySelector("#firstName").value.trim()
+            // const lastName = formEdit.querySelector("#lastName").value.trim()
+            // const age = formEdit.querySelector("#age").value.trim()
+            // const email = formEdit.querySelector("#email").value.trim()
+            // const password = formEdit.querySelector("#password").value.trim()
 
             const selectedRole = document.getElementById("rolesEdit")
 
@@ -253,19 +253,19 @@ async function editUserModal() {
             }
 
             const editedUser = {
-                id: userId,
-                firstName: firstName,
-                lastName: lastName,
-                age: age,
-                email: email,
-                password: password,
+                id: document.getElementById('idEdit').value,
+                firstName: document.getElementById('firstNameEdit').value,
+                lastName: document.getElementById('lastNameEdit').value,
+                age: document.getElementById('ageEdit').value,
+                email: document.getElementById('emailEdit').value,
+                password: document.getElementById('passwordEdit').value,
                 roles: roles
             };
 
             await editUser(editedUser)
             await fillTableOfUsers()
 
-            const modalBootstrap = bootstrap.Modal.getInstance(modalDelete);
+            const modalBootstrap = bootstrap.Modal.getInstance(modalEdit);
             modalBootstrap.hide();
 
         })
