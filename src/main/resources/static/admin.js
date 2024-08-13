@@ -12,6 +12,11 @@ document.addEventListener('DOMContentLoaded',
 const ROLE_USER = {id: 1, role: "ROLE_USER"}
 const ROLE_ADMIN = {id: 2, role: "ROLE_ADMIN"}
 
+async function getRolesList() {
+    const response = await fetch('rest/admin/roles')
+    return response.json()
+}
+
 async function findAllUsers() {
     const response = await fetch('/rest/admin')
     return response.json()

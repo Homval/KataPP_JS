@@ -6,10 +6,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import ru.kata.spring.boot_security.demo.entities.Role;
 import ru.kata.spring.boot_security.demo.entities.User;
 import ru.kata.spring.boot_security.demo.exceptionHandler.NoSuchUserException;
 import ru.kata.spring.boot_security.demo.exceptionHandler.NoUniqueLoginException;
 import ru.kata.spring.boot_security.demo.exceptionHandler.UserDataInfo;
+import ru.kata.spring.boot_security.demo.services.RoleServiceInterface;
 import ru.kata.spring.boot_security.demo.services.UserServiceInterface;
 
 import java.util.List;
@@ -20,10 +22,18 @@ import java.util.Objects;
 public class AdminRestController {
 
     private final UserServiceInterface userService;
+    private final RoleServiceInterface roleService;
 
     @Autowired
-    public AdminRestController(UserServiceInterface userService) {
+    public AdminRestController(UserServiceInterface userService, RoleServiceInterface roleService) {
         this.userService = userService;
+        this.roleService = roleService;
+    }
+
+    @GetMapping("/roles")
+    public ResponseEntity<List<Role>> getRolesList() {
+        List<Role> rolesList = roleService.getRoles();
+        return new ResponseEntity<>(rolesList, HttpStatus.OK);
     }
 
     @GetMapping()
