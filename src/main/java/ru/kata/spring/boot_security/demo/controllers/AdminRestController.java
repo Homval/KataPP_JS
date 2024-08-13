@@ -10,7 +10,6 @@ import ru.kata.spring.boot_security.demo.entities.User;
 import ru.kata.spring.boot_security.demo.exceptionHandler.NoSuchUserException;
 import ru.kata.spring.boot_security.demo.exceptionHandler.NoUniqueLoginException;
 import ru.kata.spring.boot_security.demo.exceptionHandler.UserDataInfo;
-import ru.kata.spring.boot_security.demo.services.RoleServiceInterface;
 import ru.kata.spring.boot_security.demo.services.UserServiceInterface;
 
 import java.util.List;
@@ -21,12 +20,10 @@ import java.util.Objects;
 public class AdminRestController {
 
     private final UserServiceInterface userService;
-    private RoleServiceInterface roleService;
 
     @Autowired
-    public AdminRestController(UserServiceInterface userService, RoleServiceInterface roleService) {
+    public AdminRestController(UserServiceInterface userService) {
         this.userService = userService;
-        this.roleService = roleService;
     }
 
     @GetMapping()
