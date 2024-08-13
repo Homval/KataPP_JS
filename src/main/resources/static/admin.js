@@ -17,6 +17,20 @@ async function getRolesList() {
     return response.json()
 }
 
+async function createRoleOptionList() {
+    const roleSelect = document.getElementById('role')
+
+    const roleList = await getRolesList()
+    let optionsHTML = ""
+
+    for (let opt of roleList) {
+        optionsHTML +=
+            `<option value="${opt.role}">${opt.role.substring(5)}</option>}</option>`
+    }
+
+    roleSelect.innerHTML = optionsHTML
+}
+
 async function findAllUsers() {
     const response = await fetch('/rest/admin')
     return response.json()
@@ -111,6 +125,8 @@ async function setCurrentUserNavbar() {
 
 async function createUserForm() {
     const addUserForm = document.getElementById("addNewUser")
+
+    await createRoleOptionList()
 
     addUserForm.addEventListener('submit',
         async function(event) {
